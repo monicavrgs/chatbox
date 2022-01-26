@@ -1,0 +1,147 @@
+next js
+
+npx gitignore node
+
+import appConfig from './config.json'
+import { styleSheet } from '@skynexui/components';
+
+function GlobalStyle() {
+    return (
+      <style global jsx>{`
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          list-style: none;
+        }
+        body {
+          font-family: 'Open Sans', sans-serif;
+        }
+        /* App fit Height */ 
+        html, body, #__next {
+          min-height: 100vh;
+          display: flex;
+          flex: 1;
+        }
+        #__next {
+          flex: 1;
+        }
+        #__next > * {
+          flex: 1;
+        }
+        /* ./App fit Height */ 
+      `}</style>
+    );
+  }
+
+function Box(props){
+  const Tag = props.tag || 'div'
+  return(
+    <Tag>
+      {props.children}
+    </Tag>
+  )
+}
+
+function Title(props){
+    const Tag = props.tag || 'h1'
+    return(
+        <>
+            <Tag>{props.children}</Tag>
+            {/* <style jsx>{`
+                ${Tag}{
+                    color: ${appConfig.theme.colors.neutrals['300']};
+                }
+            `}</style> */}
+        </>
+    )
+}
+
+function Text(props){
+  return(
+    <p>{props.children}</p>
+  )
+}
+
+function TextInput(){
+  return(
+    <>
+      <input placeholder='username'/>
+    </>
+  )
+}
+
+function Button(props){
+  return(
+    <button>{props.children}</button>
+  )
+}
+
+function Image(){
+  return(
+    <img />
+  )
+}
+
+function HomePage() {
+  const username = 'monicavrgs'
+
+    return (
+      <>
+      <GlobalStyle />
+
+        <Box styleSheet={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: `${appConfig.theme.colors.primary[500]}`
+        }}
+        >
+          <Box styleSheet={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-around',
+            backgroundColor: `${appConfig.theme.colors.neutrals[500]}`,
+            width: '100%',
+            maxWidth: '700px',
+            borderRadius: '5px',
+            padding: '25px'
+          }}>
+            <Box tag='form'>
+                  <Title>Boas vindas de volta</Title>
+                  <Text>{appConfig.name}</Text>
+
+                  <TextInput styleSheet={{
+                    display: 'flex',
+                  }}/>
+                  <Button type='submit' label='Entrar'>Entrar</Button>
+            </Box>
+
+            <Box styleSheet={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              flex: '1',
+              maxWidth: '200px',
+              backgroundColor: `${appConfig.theme.colors.neutrals[600]}`,
+              border: '1px solid',  
+              borderColor: appConfig.theme.colors.neutrals[700] ,
+              borderRadius: '5px',
+              padding: '14px',
+            }}>
+               <Image src={`https://github.com/${username}.png`} styleSheet={{
+                
+                  borderRadius: '50%',
+                  marginBottom: '14px'
+               }}/>
+               <Text>{username}</Text>    
+            </Box>
+          </Box>
+        </Box>
+
+        </>
+        )
+  }
+
+  
+  export default HomePage
